@@ -1,6 +1,7 @@
 import { Lora, Geist } from "next/font/google";
 import { CartProvider } from "./context/CartContext";
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/react';
 
 // Configure Lora for Headings (Mapped to match globals.css)
 const lora = Lora({
@@ -39,6 +40,7 @@ export default function RootLayout({
         <CartProvider>
           {children}
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
