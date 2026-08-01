@@ -71,14 +71,17 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="flex flex-1 items-center justify-end gap-5">
-            <button className="hidden text-[#0F2643] transition-colors hover:text-[#DA6D40] sm:block" aria-label="Search">
+          {/* UPDATED: Changed gap-5 to gap-3 md:gap-5 for better mobile spacing */}
+          <div className="flex flex-1 items-center justify-end gap-3 md:gap-5">
+            {/* UPDATED: Removed hidden sm:block */}
+            <button className="text-[#0F2643] transition-colors hover:text-[#DA6D40]" aria-label="Search">
               <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
               </svg>
             </button>
             
-            <button className="hidden text-[#0F2643] transition-colors hover:text-[#DA6D40] md:block" aria-label="Account">
+            {/* UPDATED: Removed hidden md:block */}
+            <button className="text-[#0F2643] transition-colors hover:text-[#DA6D40]" aria-label="Account">
               <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
               </svg>

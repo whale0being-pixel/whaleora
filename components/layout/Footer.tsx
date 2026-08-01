@@ -8,10 +8,12 @@ export default function Footer() {
   return (
     <footer className="bg-[#0F2643] text-white">
       <Container>
-        <div className="grid gap-12 py-8 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 md:py-8">
+        {/* UPDATED: Changed grid to 2 columns on mobile, adjusted gaps */}
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 py-8 lg:grid-cols-12 lg:gap-8 md:py-12">
           
           {/* 1. Brand & Address */}
-          <div className="lg:col-span-4">
+          {/* UPDATED: Added col-span-2 so it takes full width on mobile */}
+          <div className="col-span-2 lg:col-span-4">
             <Link href="/" className="inline-block">
               <Image
                 src="/logos/Logo.svg"
@@ -22,7 +24,8 @@ export default function Footer() {
               />
             </Link>
 
-            <p className="mt-5 max-w-sm text-[13px] font-light leading-relaxed text-white/70">
+            {/* UPDATED: Added hidden md:block to hide this long text on mobile */}
+            <p className="hidden md:block mt-5 max-w-sm text-[13px] font-light leading-relaxed text-white/70">
               Thoughtfully designed safety essentials for a calmer, more
               prepared everyday life.
             </p>
@@ -40,7 +43,8 @@ export default function Footer() {
           </div>
 
           {/* 2. Explore Block */}
-          <div className="lg:col-span-2 lg:justify-self-center">
+          {/* UPDATED: Added col-span-1 so it sits next to the Connect block on mobile */}
+          <div className="col-span-1 lg:col-span-2 lg:justify-self-center">
             <h3 className="font-heading text-[15px] tracking-tight text-[#FBECDB]">Explore</h3>
 
             <div className="mt-4 flex flex-col gap-2.5 text-[11px] font-light text-white/60">
@@ -57,7 +61,8 @@ export default function Footer() {
           </div>
 
           {/* 3. Connect Block */}
-          <div className="lg:col-span-2 lg:justify-self-center">
+          {/* UPDATED: Added col-span-1 so it sits next to the Explore block on mobile */}
+          <div className="col-span-1 lg:col-span-2 lg:justify-self-center">
             <h3 className="font-heading text-[15px] tracking-tight text-[#FBECDB]">Connect</h3>
 
             <div className="mt-4 flex flex-col gap-2.5 text-[11px] font-light text-white/60">
@@ -116,17 +121,20 @@ export default function Footer() {
           </div>
 
           {/* 4. Newsletter Block */}
-          <div className="lg:col-span-4 lg:justify-self-end">
+          {/* UPDATED: Added col-span-2 so it takes full width on mobile */}
+          <div className="col-span-2 lg:col-span-4 lg:justify-self-end">
             <h3 className="font-heading text-[15px] tracking-tight text-[#FBECDB]">
-            Join The Whaleora Community
+              Join The Whaleora Community
             </h3>
             <h2 className="mt-2 text-left font-heading text-xs leading-tight tracking-tight text-[#FBECDB] md:text-xs">
-            Safer people. Stronger communities.
-          </h2>
-            <p className="mt-3 max-w-[280px] text-[11px] font-light leading-relaxed text-white/60">
-            Receive practical safety tips, downloadable resources, awareness
-            updates and early access to new Whaleora initiatives. No spam—only
-            content that helps you stay informed and prepared.
+              Safer people. Stronger communities.
+            </h2>
+            
+            {/* UPDATED: Added hidden md:block to hide this long text on mobile */}
+            <p className="hidden md:block mt-3 max-w-[280px] text-[11px] font-light leading-relaxed text-white/60">
+              Receive practical safety tips, downloadable resources, awareness
+              updates and early access to new Whaleora initiatives. No spam—only
+              content that helps you stay informed and prepared.
             </p>
 
             <form className="mt-5 flex w-full max-w-[280px] flex-col gap-2 sm:flex-row" onSubmit={(e) => e.preventDefault()}>
