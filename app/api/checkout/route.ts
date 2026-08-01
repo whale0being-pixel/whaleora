@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
 
-// 1. Initialize the Razorpay instance with your secret keys
+
+
+export async function POST(request: Request) {
+
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID!,
   key_secret: process.env.RAZORPAY_KEY_SECRET!,
 });
-
-export async function POST(request: Request) {
   try {
     // 2. Extract the total amount sent from the frontend cart
     const body = await request.json();
