@@ -1,27 +1,48 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/layout/Hero";
-import Belief from "@/components/layout/Belief";
-import Image from "next/image";
-import Link from "next/link";
-import Container from "@/components/layout/Container";
-import About from "@/components/layout/About";
 import TrustBar from "@/components/layout/TrustBar";
+import About from "@/components/layout/About";
+import Container from "@/components/layout/Container";
+import Link from "next/link";
+import { Carousel, SlideData } from "@/components/ui/carousel";
+
+// Define your product data for the Carousel
+const productSlides: SlideData[] = [
+  {
+    title: "Personal SOS Alarm",
+    button: "View Details →",
+    src: "/images/Spray MockUP.png",
+    href: "/products/sos-alarm",
+  },
+  {
+    title: "Pepper Spray",
+    button: "View Details →",
+    src: "/images/Spray MockUP.png",
+    href: "/products/pepperspray",
+  },
+  {
+    title: "Emergency Window Breaker",
+    button: "View Details →",
+    src: "/images/Spray MockUP.png",
+    href: "/products/windowbreaker",
+  },
+];
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white overflow-hidden">
       <Navbar />
 
-      {/* 1. HERO COMPONENT (Kept at full immersive scale) */}
+      {/* 1. HERO COMPONENT */}
       <Hero />
-{/* 2. BELIEF COMPONENT */}
-<TrustBar />
       
-{/* 2. BELIEF COMPONENT */}
-<About />
-      {/* 3. WHY WHALEORA (Brand Value Props) */}
-      <section className="bg-white py-16 md:py-20">
+      {/* 2. TRUST & ABOUT */}
+      <TrustBar />
+      <About />
+      
+      {/* 3. WHY WHALEORA */}
+      <section className="bg-white py-9 md:py-9">
         <Container>
           <div className="flex flex-col items-center text-center">
             <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#DA6D40]">
@@ -60,10 +81,10 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* 4. FEATURED PRODUCTS */}
-      <section className="bg-[#FBECDB]/30 py-16 md:py-20">
+      {/* 4. FEATURED PRODUCTS (Replaced with Carousel) */}
+      <section className="bg-[#FBECDB]/30 py-8 md:py-8 overflow-hidden">
         <Container>
-          <div className="flex flex-col items-center text-center">
+          <div className="flex flex-col items-center text-center mb-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#DA6D40]">
               The Essentials
             </p>
@@ -75,101 +96,12 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            
-            {/* Product 1 */}
-            <div className="group flex flex-col justify-between rounded-2xl border border-[#0F2643]/10 bg-white p-6 transition-all duration-300 hover:border-[#DA6D40]/40 hover:shadow-md">
-              <div>
-                <div className="flex h-52 w-full items-center justify-center rounded-xl bg-[#FBECDB]/30 transition-colors group-hover:bg-[#FBECDB]/60">
-                  <Image
-                    src="/images/Spray MockUP.png"
-                    alt="SOS Alarm"
-                    width={180}
-                    height={180}
-                    className="h-36 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <p className="mt-5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#DA6D40]">
-                  Acoustic Defense
-                </p>
-                <h3 className="mt-1.5 font-heading text-xl tracking-tight text-[#0F2643]">
-                  SOS Alarm
-                </h3>
-                <p className="mt-2 text-[12px] font-light leading-relaxed text-[#5F6F77]">
-                  130dB piercing dual-siren with built-in strobe LED for immediate attention deterrent.
-                </p>
-              </div>
-              <div className="mt-6 flex items-center justify-between border-t border-[#0F2643]/5 pt-4">
-                <span className="font-heading text-base font-medium text-[#0F2643]">₹1,299</span>
-                <Link href="/products/sos-alarm" className="text-[11px] font-medium uppercase tracking-wider text-[#0F2643] transition-colors hover:text-[#DA6D40]">
-                  View Details →
-                </Link>
-              </div>
-            </div>
-
-            {/* Product 2 */}
-            <div className="group flex flex-col justify-between rounded-2xl border border-[#0F2643]/10 bg-white p-6 transition-all duration-300 hover:border-[#DA6D40]/40 hover:shadow-md">
-              <div>
-                <div className="flex h-52 w-full items-center justify-center rounded-xl bg-[#FBECDB]/30 transition-colors group-hover:bg-[#FBECDB]/60">
-                  <Image
-                    src="/images/Spray MockUP.png"
-                    alt="Pepper Spray"
-                    width={180}
-                    height={180}
-                    className="h-36 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <p className="mt-5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#DA6D40]">
-                  Rapid Response
-                </p>
-                <h3 className="mt-1.5 font-heading text-xl tracking-tight text-[#0F2643]">
-                  Pepper Spray
-                </h3>
-                <p className="mt-2 text-[12px] font-light leading-relaxed text-[#5F6F77]">
-                  High-velocity ballistic stream formulation with flip-top safety guard for effortless use.
-                </p>
-              </div>
-              <div className="mt-6 flex items-center justify-between border-t border-[#0F2643]/5 pt-4">
-                <span className="font-heading text-base font-medium text-[#0F2643]">₹649</span>
-                <Link href="/products/pepper-spray" className="text-[11px] font-medium uppercase tracking-wider text-[#0F2643] transition-colors hover:text-[#DA6D40]">
-                  View Details →
-                </Link>
-              </div>
-            </div>
-
-            {/* Product 3 */}
-            <div className="group flex flex-col justify-between rounded-2xl border border-[#0F2643]/10 bg-white p-6 transition-all duration-300 hover:border-[#DA6D40]/40 hover:shadow-md sm:col-span-2 lg:col-span-1">
-              <div>
-                <div className="flex h-52 w-full items-center justify-center rounded-xl bg-[#FBECDB]/30 transition-colors group-hover:bg-[#FBECDB]/60">
-                  <Image
-                    src="/images/Spray MockUP.png"
-                    alt="Window Breaker"
-                    width={180}
-                    height={180}
-                    className="h-36 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <p className="mt-5 text-[9px] font-bold uppercase tracking-[0.2em] text-[#DA6D40]">
-                  Emergency Escape
-                </p>
-                <h3 className="mt-1.5 font-heading text-xl tracking-tight text-[#0F2643]">
-                  Window Breaker
-                </h3>
-                <p className="mt-2 text-[12px] font-light leading-relaxed text-[#5F6F77]">
-                  Spring-loaded tungsten steel mechanism designed to shatter automotive glass instantly.
-                </p>
-              </div>
-              <div className="mt-6 flex items-center justify-between border-t border-[#0F2643]/5 pt-4">
-                <span className="font-heading text-base font-medium text-[#0F2643]">₹899</span>
-                <Link href="/products/window-breaker" className="text-[11px] font-medium uppercase tracking-wider text-[#0F2643] transition-colors hover:text-[#DA6D40]">
-                  View Details →
-                </Link>
-              </div>
-            </div>
-
+          {/* The New 3D Carousel */}
+          <div className="flex w-full justify-center pb-12">
+            <Carousel slides={productSlides} />
           </div>
 
-          <div className="mt-10 text-center">
+          <div className="mt-16 text-center">
             <Link href="/products">
               <button className="inline-flex h-10 items-center justify-center rounded-full bg-[#0F2643] px-7 text-[11px] font-medium uppercase tracking-widest text-white transition-all hover:bg-[#DA6D40]">
                 View All Products

@@ -1,11 +1,24 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import confetti from "canvas-confetti"; // Import the raw confetti function
 import Navbar from "@/components/layout/Navbar";
 import Container from "@/components/layout/Container";
 
 export default function SuccessPage() {
   const router = useRouter();
+
+  // Fire confetti automatically when the page loads!
+  useEffect(() => {
+    confetti({
+      particleCount: 150,
+      spread: 80,
+      origin: { y: 0.6 }, // Starts slightly lower on the screen for a nice fountain effect
+      colors: ['#DA6D40', '#0F2643', '#FBECDB'], // Your brand colors
+      zIndex: 9999, // Ensures it appears on top of everything
+    });
+  }, []);
 
   return (
     <main className="min-h-screen bg-[#FAFAFA]">

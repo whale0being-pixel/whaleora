@@ -8,7 +8,7 @@ export default function About() {
 
 return (
 
-<section className="relative overflow-hidden bg-white py-12 md:py-12">
+<section className="relative overflow-hidden bg-white py-6 md:py-6">
 
 <Image
 

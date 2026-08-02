@@ -7,7 +7,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Container from "@/components/layout/Container";
 import Button from "@/components/ui/button";
-
+import { ConfettiButton } from "@/components/ui/confetti"; // adjust the path if you named the file differently
 // 1. Import the cart context
 import { useCart } from "@/app/context/CartContext";
 // Note: If you still have path issues, use: import { useCart } from "../../context/CartContext"; (or wherever it is located)
@@ -22,7 +22,7 @@ export default function ProductDetailPage() {
   const product = {
     name: "SOS Personal Alarm",
     subtitle: "Acoustic Defense",
-    price: 1299,
+    price: 1799,
     rating: 4.9,
     reviewsCount: 128,
     description:
@@ -141,11 +141,17 @@ export default function ProductDetailPage() {
               {/* Action Buttons */}
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 
-                {/* 3. Replaced <Link> wrapper with an onClick handler */}
-                <Button 
+                {/* Replaced <Button> with <ConfettiButton> */}
+                <ConfettiButton 
+                  options={{
+                    particleCount: 120,
+                    spread: 70,
+                    colors: ["#DA6D40", "#0F2643", "#FBECDB"], // Matches your brand palette!
+                  }}
                   onClick={() => {
+                    // This still runs perfectly while the confetti fires
                     addToCart({
-                      id: "sos-alarm", // Unique ID
+                      id: "sos-alarm", // Fixed ID to match the product
                       name: product.name,
                       price: product.price,
                       quantity: quantity,
@@ -155,7 +161,7 @@ export default function ProductDetailPage() {
                   className="flex-1 h-12 w-full rounded-full text-[11px] font-medium uppercase tracking-widest transition hover:scale-[1.02]"
                 >
                   Add to Cart
-                </Button>
+                </ConfettiButton>
 
                 <Link href="/checkout" className="flex-1">
                   <button className="flex h-12 w-full items-center justify-center rounded-full border border-[#0F2643]/20 bg-transparent text-[11px] font-medium uppercase tracking-widest text-[#0F2643] transition hover:border-[#DA6D40] hover:text-[#DA6D40]">
