@@ -10,42 +10,16 @@ import Button from "@/components/ui/button";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 
 const products = [
-  {
-    id: "p-1",
-    name: "The Everyday Safety Kit",
-    subtitle: "Complete personal protection",
-    price: "₹2,499",
-    category: "Kits",
-    image: "/images/Spray MockUP.png", 
-    badge: "Bestseller",
-    href: "#",
-  },
+  
   {
     id: "p-2",
     name: "Personal SOS Alarm",
     subtitle: "Compact & ultra-loud alarm",
     price: "₹1799",
     category: "Alarms",
-    image: "/images/Spray MockUP.png",
+    image: "/images/SOS mock up.png",
+    badge: "Bestseller",
     href: "/products/sos-alarm",
-  },
-  {
-    id: "p-3",
-    name: "Emergency Window Breaker",
-    subtitle: "Emergency escape tool",
-    price: "₹599",
-    category: "Tools",
-    image: "/images/Spray MockUP.png",
-    href: "/products/windowbreaker",
-  },
-  {
-    id: "p-4",
-    name: "Campus Preparedness Pack",
-    subtitle: "Curated for students",
-    price: "₹1,999",
-    category: "Kits",
-    image: "/images/Spray MockUP.png",
-    href: "#",
   },
   {
     id: "p-5",
@@ -57,6 +31,44 @@ const products = [
     badge: "Essential",
     href: "/products/pepperspray",
   },
+  {
+    id: "p-8",
+    name: "Survival Whistle",
+    subtitle: "120dB dual-tube design",
+    price: "₹299",
+    category: "Alarms",
+    image: "/images/Whistle mock up.png",
+    href: "/products/whistle",
+  },
+  {
+    id: "p-3",
+    name: "Emergency Window Breaker",
+    subtitle: "Emergency escape tool",
+    price: "₹599",
+    category: "Tools",
+    image: "/images/Window Breaker mock up.png",
+    href: "/products/windowbreaker",
+  },
+  {
+    id: "p-1",
+    name: "The Everyday Safety Kit",
+    subtitle: "Complete personal protection",
+    price: "₹2,499",
+    category: "Kits",
+    image: "/images/Spray MockUP.png", 
+    href: "#",
+  },
+ 
+  {
+    id: "p-4",
+    name: "Campus Preparedness Pack",
+    subtitle: "Curated for students",
+    price: "₹1,999",
+    category: "Kits",
+    image: "/images/Spray MockUP.png",
+    href: "#",
+  },
+
   {
     id: "p-6",
     name: "First Aid Mini",
@@ -75,15 +87,7 @@ const products = [
     image: "/images/Spray MockUP.png",
     href: "#",
   },
-  {
-    id: "p-8",
-    name: "Survival Whistle",
-    subtitle: "120dB dual-tube design",
-    price: "₹299",
-    category: "Alarms",
-    image: "/images/Spray MockUP.png",
-    href: "/products/whistle",
-  },
+  
   {
     id: "p-9",
     name: "Drink Cover",
@@ -115,7 +119,7 @@ export default function ProductsPage() {
           src="/patterns/Pattern wo Background.svg"
           alt=""
           fill
-          className="pointer-events-none object-cover opacity-[0.04]"
+          className="pointer-events-none object-cover opacity-[0.50]"
         />
 
         <Container className="relative text-center">
@@ -155,28 +159,29 @@ export default function ProductsPage() {
               <CardContainer key={prod.id} className="inter-var my-0 py-0 w-full">
                 <CardBody className="group/card relative flex h-full w-full flex-col justify-between rounded-2xl border border-[#0F2643]/10 bg-white p-8 transition-all duration-300 hover:border-[#DA6D40]/40 hover:shadow-2xl hover:shadow-[#DA6D40]/10">
                   <div>
-                    <Link href={prod.href} className="block">
-                      <CardItem
-                        translateZ="80"
-                        className="relative flex h-64 w-full items-center justify-center rounded-xl bg-[#FBECDB]/30 transition-colors group-hover/card:bg-[#FBECDB]/60"
-                      >
-                        {prod.badge && (
-                          <CardItem
-                            translateZ="110"
-                            className="absolute left-3 top-3 z-10 rounded-full bg-[#DA6D40] px-3 py-1 text-[8px] font-bold uppercase tracking-wider text-white"
-                          >
-                            {prod.badge}
-                          </CardItem>
-                        )}
-                        <Image
-                          src={prod.image}
-                          alt={prod.name}
-                          width={200}
-                          height={200}
-                          className="h-44 w-auto object-contain transition-transform duration-500 group-hover/card:scale-105"
-                        />
-                      </CardItem>
-                    </Link>
+                    {/* NEW CODE */}
+<Link href={prod.href} className="block">
+  <CardItem
+    translateZ="80"
+    // Removed flex/items-center and added overflow-hidden to keep the hover effect inside the rounded corners
+    className="relative h-64 w-full overflow-hidden rounded-xl bg-[#FBECDB]/30 transition-colors group-hover/card:bg-[#FBECDB]/60"
+  >
+    {prod.badge && (
+      <CardItem
+        translateZ="110"
+        className="absolute left-3 top-3 z-10 rounded-full bg-[#DA6D40] px-3 py-1 text-[8px] font-bold uppercase tracking-wider text-white"
+      >
+        {prod.badge}
+      </CardItem>
+    )}
+    <Image
+      src={prod.image}
+      alt={prod.name}
+      fill // Tells Next.js to fill the parent container completely
+      className="object-cover object-center transition-transform duration-500 group-hover/card:scale-105"
+    />
+  </CardItem>
+</Link>
 
                     <CardItem
                       translateZ="40"

@@ -30,8 +30,8 @@ export default function ProductDetailPage() {
     description:
       "Engineered for immediate deterrence and peace of mind. The Whaleora SOS Alarm combines a piercing 130dB dual-siren with a high-intensity strobe LED, packaged in a sleek, minimalist keychain design that fits effortlessly into your everyday carry.",
     images: [
-      "/images/Spray MockUP.png",
-      "/images/Spray MockUP.png",
+      "/images/SOS mock up.png",
+      "/images/Flat Lay alarm.png",
       "/images/Spray MockUP.png",
     ],
     specs: [
@@ -63,9 +63,8 @@ export default function ProductDetailPage() {
                 <Image
                   src={product.images[activeImage]}
                   alt={product.name}
-                  width={400}
-                  height={400}
-                  className="h-72 w-auto object-contain drop-shadow-md"
+                  fill // <-- Use fill instead of fixed width/height
+                  className="object-cover object-center w-full h-full"
                   priority
                 />
               </div>

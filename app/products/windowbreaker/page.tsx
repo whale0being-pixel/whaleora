@@ -30,9 +30,9 @@ export default function ProductDetailPage() {
     description:
       "An essential emergency escape tool engineered to instantly shatter automotive glass and slice jammed seatbelts when every second counts. Compact and reliable, the Whaleora Travel Window Breaker ensures you are never trapped on the road.",
     images: [
-      "/images/breaker.png",
-      "/images/products/breaker.png",
-      "/images/breaker.png",
+      "/images/Window Breaker mock up.png",
+      "/images/window breaker flat lay.png",
+      "/images/spray.png",
     ],
     specs: [
       { label: "Mechanism", value: "Spring-Loaded High-Impact" },
@@ -63,9 +63,8 @@ export default function ProductDetailPage() {
                 <Image
                   src={product.images[activeImage]}
                   alt={product.name}
-                  width={400}
-                  height={400}
-                  className="h-72 w-auto object-contain drop-shadow-md"
+                  fill // <-- Use fill instead of fixed width/height
+                  className="object-cover object-center w-full h-full"
                   priority
                 />
               </div>

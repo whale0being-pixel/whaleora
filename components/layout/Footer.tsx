@@ -37,7 +37,7 @@ export default function Footer() {
             {/* Address Block */}
             <div className="mt-6 flex flex-col gap-1 text-[11px] font-light text-white/50">
               <p>Whaleora</p>
-              <p>Shambhaji Nagar, Thane</p>
+              <p>Sambhaji Nagar, Thane</p>
               <p>Maharashtra, India</p>
             </div>
           </div>

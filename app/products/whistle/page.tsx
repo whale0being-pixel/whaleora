@@ -30,9 +30,9 @@ export default function ProductDetailPage() {
     description:
       "A fail-proof, battery-free safety essential. Crafted from aviation-grade aluminum to deliver a piercing 120dB dual-tube alert, the Whaleora Emergency Survival Whistle is built to ensure you are heard in any environment.",
     images: [
-      "/images/products/whistle.png",
-      "/images/products/whistle.png",
-      "/images/products/whistle.png",
+      "/images/Whistle mock up.png",
+      "/images/Flat lay whistle.png",
+      "/images/whistle.png",
     ],
     specs: [
       { label: "Volume Output", value: "120dB Dual-Tube Design" },
@@ -63,9 +63,8 @@ export default function ProductDetailPage() {
                 <Image
                   src={product.images[activeImage]}
                   alt={product.name}
-                  width={400}
-                  height={400}
-                  className="h-72 w-auto object-contain drop-shadow-md"
+                  fill // <-- Use fill instead of fixed width/height
+                  className="object-cover object-center w-full h-full"
                   priority
                 />
               </div>

@@ -17,7 +17,7 @@ export default function AboutPage() {
           alt=""
           fill
           priority
-          className="pointer-events-none object-cover opacity-[0.10]"
+          className="pointer-events-none object-cover opacity-[0.50]"
         />
 
         <Container className="relative z-10 flex flex-col items-center text-center">

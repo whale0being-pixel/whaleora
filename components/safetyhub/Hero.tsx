@@ -18,7 +18,7 @@ export default function Hero() {
         alt=""
         fill
         priority
-        className="pointer-events-none object-cover opacity-[0.05]"
+        className="pointer-events-none object-cover opacity-[0.50]"
       />
 
       <Container className="relative z-10">
@@ -41,14 +41,14 @@ export default function Hero() {
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <button
-              onClick={() => scrollToSection("newsletter")}
+              onClick={() => scrollToSection("PersonaSelector")}
               className="rounded-full bg-[#0F2643] px-8 py-4 text-white transition hover:bg-[#192340]"
             >
               Explore Guides
             </button>
             
             <button
-              onClick={() => scrollToSection("downloads")}
+              onClick={() => scrollToSection("Downloads")}
               className="rounded-full border border-[#0F2643]/20 px-8 py-4 text-[#0F2643] transition hover:bg-white"
             >
               Browse Resources

@@ -65,9 +65,8 @@ export default function ProductDetailPage() {
                 <Image
                   src={product.images[activeImage]}
                   alt={product.name}
-                  width={400}
-                  height={400}
-                  className="h-72 w-auto object-contain drop-shadow-md"
+                  fill // <-- Use fill instead of fixed width/height
+                  className="object-cover object-center w-full h-full"
                   priority
                 />
               </div>

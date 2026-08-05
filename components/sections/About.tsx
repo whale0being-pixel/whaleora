@@ -12,7 +12,7 @@ const productSlides: SlideData[] = [
   {
     title: "Personal SOS Alarm",
     button: "View Details →",
-    src: "/images/Spray MockUP.png",
+    src: "/images/SOS mock up.png",
     href: "/products/sos-alarm",
   },
   {
@@ -24,7 +24,7 @@ const productSlides: SlideData[] = [
   {
     title: "Emergency Window Breaker",
     button: "View Details →",
-    src: "/images/Spray MockUP.png",
+    src: "/images/Window Breaker mock up.png",
     href: "/products/windowbreaker",
   },
 ];

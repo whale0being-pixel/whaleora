@@ -69,7 +69,7 @@ export default function ContactPage() {
           alt=""
           fill
           priority
-          className="pointer-events-none object-cover opacity-[0.10]"
+          className="pointer-events-none object-cover opacity-[0.50]"
         />
 
         <Container className="relative z-10 flex w-full flex-col items-center justify-center text-center">
@@ -217,7 +217,7 @@ export default function ContactPage() {
                     Partnerships & Institutions
                   </p>
                   <a href="mailto:partners@whaleora.com" className="mt-1.5 block text-[15px] font-medium text-[#0F2643] transition-colors hover:text-[#DA6D40]">
-                    partners@whaleora.com
+                    hello@whaleora.com
                   </a>
                 </div>
               </div>

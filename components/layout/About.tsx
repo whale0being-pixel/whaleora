@@ -86,7 +86,7 @@ safety feels calm, accessible and empowering.
 
 <Image
 
-src="/images/Spray MockUP.png"
+src="/images/SOS mock up.png"
 
 alt="Whaleora safety products"
 

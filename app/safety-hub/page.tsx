@@ -18,16 +18,16 @@ export default function SafetyCentrePage() {
       <Navbar />
       
       <Hero />
-
+      <div id="PersonaSelector" className="scroll-mt-24">
       <PersonaSelector
         selected={selected}
         onSelect={setSelected}
       />
-
+      </div>
       <EmergencyToolkit selected={selected} />
-
+      <div id="Downloads" className="scroll-mt-24">
       <Downloads selected={selected} />
-
+      </div>
       <Programmes />
 
       
