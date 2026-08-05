@@ -8,6 +8,8 @@ import Footer from "@/components/layout/Footer";
 import Container from "@/components/layout/Container";
 import Button from "@/components/ui/button";
 import { ConfettiButton } from "@/components/ui/confetti"; // adjust the path if you named the file differently
+import ProductReviews from "@/components/ProductReviews"; // <-- 1. Import it here
+
 // 1. Import the cart context
 import { useCart } from "@/app/context/CartContext";
 // Note: If you still have path issues, use: import { useCart } from "../../context/CartContext"; (or wherever it is located)
@@ -188,7 +190,10 @@ export default function ProductDetailPage() {
           </div>
         </Container>
       </section>
-
+{/* 2. Add the reviews component at the bottom of the page */}
+<section className="mx-auto max-w-5xl px-6 py-16">
+        <ProductReviews productId="pepperspray" /> 
+      </section>
       <Footer />
     </main>
   );
