@@ -152,11 +152,11 @@ export default function ProductsPage() {
       </section>
 
       {/* Filter & Grid Section */}
-      <section className="py-12 md:py-20">
+      <section className="py-3 md:py-3">
         <Container>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
             {filteredProducts.map((prod) => (
-              <CardContainer key={prod.id} className="inter-var my-0 py-0 w-full">
+              <CardContainer key={prod.id} className="inter-var !my-0 !py-0 w-full">
                 <CardBody className="group/card relative flex h-full w-full flex-col justify-between rounded-2xl border border-[#0F2643]/10 bg-white p-8 transition-all duration-300 hover:border-[#DA6D40]/40 hover:shadow-2xl hover:shadow-[#DA6D40]/10">
                   <div>
                     {/* NEW CODE */}

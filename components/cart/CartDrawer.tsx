@@ -25,22 +25,26 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
-
   return (
     <>
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 z-50 bg-[#0F2643]/20 backdrop-blur-sm transition-opacity"
+        className={`fixed inset-0 z-[60] bg-[#0F2643]/40 backdrop-blur-sm transition-opacity duration-500 ${
+          isOpen ? "visible opacity-100" : "invisible opacity-0"
+        }`}
         onClick={onClose}
         aria-hidden="true"
       />
 
       {/* Drawer Panel */}
-      <div className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col bg-white shadow-2xl transition-transform duration-500 sm:max-w-md">
+      <div 
+        className={`fixed inset-y-0 right-0 z-[70] flex w-full max-w-sm flex-col bg-white shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] sm:max-w-md ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
         
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[#0F2643]/10 px-6 py-5">
+        <div className="flex shrink-0 items-center justify-between border-b border-[#0F2643]/10 px-6 py-5">
           <h2 className="font-heading text-lg tracking-tight text-[#0F2643]">Your Cart</h2>
           <button 
             onClick={onClose}
@@ -95,14 +99,14 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                       <div className="flex h-8 w-20 items-center justify-between rounded-full border border-[#0F2643]/15 px-3">
                         <button 
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="text-xs text-[#0F2643]/60 hover:text-[#0F2643] transition-colors"
+                          className="text-xs text-[#0F2643]/60 transition-colors hover:text-[#0F2643]"
                         >
                           −
                         </button>
                         <span className="text-[11px] text-[#0F2643]">{item.quantity}</span>
                         <button 
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="text-xs text-[#0F2643]/60 hover:text-[#0F2643] transition-colors"
+                          className="text-xs text-[#0F2643]/60 transition-colors hover:text-[#0F2643]"
                         >
                           +
                         </button>
@@ -120,7 +124,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
         {/* Footer / Checkout */}
         {cartItems.length > 0 && (
-          <div className="border-t border-[#0F2643]/10 bg-white px-6 py-6">
+          <div className="shrink-0 border-t border-[#0F2643]/10 bg-white px-6 py-6">
             <div className="flex items-center justify-between">
               <span className="font-heading text-[15px] tracking-tight text-[#0F2643]">Subtotal</span>
               <span className="font-heading text-xl tracking-tight text-[#0F2643]">
@@ -131,11 +135,25 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               Shipping and taxes calculated at checkout.
             </p>
             
-            <Link href="/checkout" onClick={onClose}>
-              <button className="mt-5 flex h-10 w-full items-center justify-center rounded-full bg-[#0F2643] px-8 text-[11px] font-medium text-white transition duration-300 hover:bg-[#DA6D40]">
+            <div className="mt-5 flex flex-col gap-3">
+              {/* Button 1: View Cart (Outline Style) */}
+              <Link 
+                href="/cart" 
+                onClick={onClose} 
+                className="flex h-11 w-full items-center justify-center rounded-full border border-[#0F2643] bg-transparent text-[11px] font-bold uppercase tracking-widest text-[#0F2643] transition-colors hover:bg-[#0F2643] hover:text-white"
+              >
+                View Cart
+              </Link>
+              
+              {/* Button 2: Proceed to Checkout (Solid Style) */}
+              <Link 
+                href="/checkout" 
+                onClick={onClose} 
+                className="flex h-11 w-full items-center justify-center rounded-full bg-[#DA6D40] text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#0F2643] hover:shadow-lg"
+              >
                 Proceed to Checkout
-              </button>
-            </Link>
+              </Link>
+            </div>
           </div>
         )}
       </div>

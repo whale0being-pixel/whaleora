@@ -81,7 +81,7 @@ export default function Footer() {
             <div className="mt-6 flex gap-4 text-white/60">
               {/* Instagram */}
               <a
-                href="https://www.instagram.com/whaleora.safety?igsh=N3M3c3BzM3JvcWdr&utm_source=qr"
+                href="https://www.instagram.com/whaleora.safety"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition hover:text-[#DA6D40] hover:-translate-y-0.5"
@@ -107,7 +107,7 @@ export default function Footer() {
 
               {/* LinkedIn */}
               <a
-                href="https://www.linkedin.com/company/whaleora-safety/about/?viewAsMember=true"
+                href="https://www.linkedin.com/company/whaleora-safety/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition hover:text-[#DA6D40] hover:-translate-y-0.5"

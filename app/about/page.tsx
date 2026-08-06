@@ -39,7 +39,7 @@ export default function AboutPage() {
       </section>
 
       {/* Combined Story & Belief Section */}
-      <section className="relative overflow-hidden bg-white py-20 md:py-28">
+      <section className="relative overflow-hidden bg-white py-12 md:py-12">
         <Image
           src="/patterns/Pattern wo Background.svg"
           alt=""
@@ -81,45 +81,48 @@ export default function AboutPage() {
             </div>
 
             {/* RIGHT COLUMN: Belief Cards */}
-            <div className="flex flex-col gap-6 md:gap-8">
-              
-              {/* Optional Right-Side Context Header */}
-              <div className="mb-4 text-center lg:text-left">
-                <h3 className="font-heading text-3xl tracking-tight text-[#0F2643] md:text-4xl">
-                  Safety isn&apos;t panic. <br />
-                  Safety is confidence.
-                </h3>
-              </div>
+<div className="flex flex-col gap-4">
+  
+  {/* Optional Right-Side Context Header */}
+  <div className="mb-4 text-center lg:text-left">
+    <h3 className="font-heading text-3xl tracking-tight text-[#0F2643] md:text-4xl">
+      Safety isn&apos;t panic. <br />
+      Safety is confidence.
+    </h3>
+  </div>
 
-              {/* Stacked Cards */}
-              {[
-                {
-                  title: "Vision",
-                  text: "A world where every person moves through life with the quiet confidence of knowing they are safe.",
-                },
-                {
-                  title: "Mission",
-                  text: "To make personal safety simple, reliable and accessible through thoughtfully designed products, education and partnerships.",
-                },
-                {
-                  title: "Promise",
-                  text: "Safety you can trust, when it matters most.",
-                },
-              ].map((card) => (
-                <div
-                  key={card.title}
-                  className="flex flex-col rounded-[32px] bg-[#FBECDB]/40 p-8 transition duration-500 hover:-translate-y-1 hover:shadow-xl md:p-10"
-                >
-                  <h4 className="font-heading text-2xl tracking-tight text-[#0F2643] md:text-3xl">
-                    {card.title}
-                  </h4>
+  {/* Stacked Cards */}
+  {[
+    {
+      title: "Vision",
+      text: "A world where every person moves through life with the quiet confidence of knowing they are safe.",
+    },
+    {
+      title: "Mission",
+      text: "To make personal safety simple, reliable and accessible through thoughtfully designed products, education and partnerships.",
+    },
+    {
+      title: "Promise",
+      text: "Safety you can trust, when it matters most.",
+    },
+  ].map((card) => (
+    <div
+      key={card.title}
+      // Changed to smaller rounded corners and reduced padding (p-6 and md:p-8)
+      className="flex flex-col rounded-2xl bg-[#FBECDB]/40 p-6 transition duration-500 hover:-translate-y-1 hover:shadow-lg md:p-8"
+    >
+      {/* Scaled down heading sizes */}
+      <h4 className="font-heading text-xl tracking-tight text-[#0F2643] md:text-2xl">
+        {card.title}
+      </h4>
 
-                  <p className="mt-4 text-base font-light leading-relaxed text-[#5F6F77]">
-                    {card.text}
-                  </p>
-                </div>
-              ))}
-            </div>
+      {/* Tighter top margin and scaled down text base */}
+      <p className="mt-2 text-sm font-light leading-relaxed text-[#5F6F77] md:text-base">
+        {card.text}
+      </p>
+    </div>
+  ))}
+</div>
             
           </div>
         </Container>

@@ -27,6 +27,12 @@ const productSlides: SlideData[] = [
     src: "/images/Window Breaker mock up.png",
     href: "/products/windowbreaker",
   },
+  {
+    title: "Survival Whistle",
+    button: "View Details →",
+    src: "/images/Whistle mock up.png",
+    href: "/products/whistle",
+  },
 ];
 
 export default function HomePage() {
@@ -82,26 +88,28 @@ export default function HomePage() {
       </section>
 
       {/* 4. FEATURED PRODUCTS (Replaced with Carousel) */}
-      <section className="bg-[#FBECDB]/30 py-8 md:py-8 overflow-hidden">
+      <section className="bg-[#FBECDB]/30 py-10 overflow-hidden">
         <Container>
-          <div className="flex flex-col items-center text-center mb-10">
+          {/* Reduced margin-bottom and slightly scaled down headings to match the new compact cards */}
+          <div className="mb-4 flex flex-col items-center text-center">
             <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#DA6D40]">
               The Essentials
             </p>
-            <h2 className="mt-3 font-heading text-3xl tracking-tight text-[#0F2643] md:text-4xl">
+            <h2 className="mt-2 font-heading text-2xl tracking-tight text-[#0F2643] md:text-3xl">
               Engineered for absolute confidence.
             </h2>
-            <p className="mt-3 max-w-md text-[13px] font-light text-[#5F6F77]">
+            <p className="mt-2 max-w-md text-[13px] font-light text-[#5F6F77]">
               Compact, elegant tools designed to integrate seamlessly into your daily routine.
             </p>
           </div>
 
-          {/* The New 3D Carousel */}
-          <div className="flex w-full justify-center pb-12">
+          {/* The New Carousel - Removed pb-12 padding */}
+          <div className="flex w-full justify-center">
             <Carousel slides={productSlides} />
           </div>
 
-          <div className="mt-16 text-center">
+          {/* Slashed the top margin from mt-16 to mt-4 */}
+          <div className="mt-4 text-center">
             <Link href="/products">
               <button className="inline-flex h-10 items-center justify-center rounded-full bg-[#0F2643] px-7 text-[11px] font-medium uppercase tracking-widest text-white transition-all hover:bg-[#DA6D40]">
                 View All Products
@@ -110,52 +118,66 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
-
       {/* 5. SAFETY HUB BANNER */}
-      <section className="bg-[#0F2643] py-16 text-white">
+      <section className="bg-white py-10 md:py-12">
         <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#DA6D40]">
-                Whaleora Library
-              </p>
-              <h2 className="mt-3 font-heading text-2xl leading-tight tracking-tight text-[#FBECDB] sm:text-3xl">
-                Knowledge is preparedness.
-              </h2>
-              <p className="mt-4 text-[13px] font-light leading-relaxed text-white/70">
-                Access free safety checklists, de-escalation guides, and emergency contact templates customized for students, professionals, and families.
-              </p>
-              <div className="mt-6">
-                <Link href="/safety-hub">
-                  <button className="inline-flex h-10 items-center justify-center rounded-full bg-[#DA6D40] px-7 text-[11px] font-medium uppercase tracking-widest text-white transition-all hover:bg-white hover:text-[#0F2643]">
-                    Visit Safety Hub
-                  </button>
-                </Link>
-              </div>
-            </div>
+          <div className="relative overflow-hidden rounded-[24px] bg-[#FBECDB]/40 p-8 md:p-10 lg:p-12">
+            
+            {/* Subtle background ambient glows */}
+            <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[#DA6D40]/10 blur-[60px]" />
+            <div className="absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-[#0F2643]/5 blur-[60px]" />
 
-            <div className="grid grid-cols-2 gap-3">
-              <div className="rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-                <p className="font-heading text-2xl text-[#FBECDB]">100%</p>
-                <p className="mt-1 text-[10px] font-light text-white/60">Reliable hardware specs</p>
+            <div className="relative z-10 flex flex-col items-center justify-between gap-8 lg:flex-row lg:gap-12">
+              
+              {/* Left Content: The Pitch */}
+              <div className="max-w-lg text-center lg:text-left lg:mr-auto">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#DA6D40]">
+                  Whaleora Safety Hub
+                </p>
+                
+                <h2 className="mt-3 font-heading text-2xl leading-[1.1] tracking-tight text-[#0F2643] md:text-3xl lg:text-4xl">
+                  Preparedness is a habit.
+                </h2>
+                
+                <p className="mt-3 text-[13px] font-light leading-relaxed text-[#5F6F77]">
+                  Access free checklists, situational guides, and expert resources designed for everyday confidence.
+                </p>
+                
+                <div className="mt-6 flex justify-center lg:justify-start">
+                  <Link href="/safety-hub">
+                    <button className="inline-flex h-10 items-center justify-center rounded-full bg-[#0F2643] px-7 text-[10px] font-medium uppercase tracking-widest text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#DA6D40] hover:shadow-lg hover:shadow-[#DA6D40]/20">
+                      Explore The Hub
+                    </button>
+                  </Link>
+                </div>
               </div>
-              <div className="rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-                <p className="font-heading text-2xl text-[#FBECDB]">24/7</p>
-                <p className="mt-1 text-[10px] font-light text-white/60">Ready when you are</p>
+
+              {/* Right Content: Streamlined Minimal Cards */}
+              <div className="grid w-full grid-cols-2 gap-3 sm:max-w-md lg:shrink-0">
+                {[
+                  { title: "Guides", desc: "Everyday situational awareness." },
+                  { title: "Checklists", desc: "Travel and campus prep." },
+                  { title: "Workshops", desc: "Institutional training." },
+                  { title: "Resources", desc: "Emergency templates." },
+                ].map((item, i) => (
+                  <div 
+                    key={i} 
+                    className="flex flex-col justify-center rounded-xl border border-white/60 bg-white/50 p-4 shadow-sm backdrop-blur-md transition-colors hover:bg-white"
+                  >
+                    <h3 className="font-heading text-base font-medium text-[#0F2643]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1 text-[11px] font-light leading-relaxed text-[#5F6F77]">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
               </div>
-              <div className="rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-                <p className="font-heading text-2xl text-[#FBECDB]">B2B</p>
-                <p className="mt-1 text-[10px] font-light text-white/60">Institutional programs</p>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-                <p className="font-heading text-2xl text-[#FBECDB]">130dB</p>
-                <p className="mt-1 text-[10px] font-light text-white/60">Acoustic power output</p>
-              </div>
+
             </div>
           </div>
         </Container>
       </section>
-
       <Footer />
     </main>
   );

@@ -1,220 +1,128 @@
 "use client";
-import { IconArrowNarrowRight } from "@tabler/icons-react";
-import { useState, useRef, useId, useEffect } from "react";
+
+import React, { useEffect, useRef, useState } from "react";
+import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export interface SlideData {
   title: string;
   button: string;
   src: string;
   href: string;
+  category?: string;
 }
-
-interface SlideProps {
-  slide: SlideData;
-  index: number;
-  current: number;
-  handleSlideClick: (index: number) => void;
-}
-
-const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
-  const slideRef = useRef<HTMLLIElement>(null);
-  const xRef = useRef(0);
-  const yRef = useRef(0);
-  const frameRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const animate = () => {
-      if (!slideRef.current) return;
-
-      const x = xRef.current;
-      const y = yRef.current;
-
-      slideRef.current.style.setProperty("--x", `${x}px`);
-      slideRef.current.style.setProperty("--y", `${y}px`);
-
-      frameRef.current = requestAnimationFrame(animate);
-    };
-
-    frameRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (frameRef.current) {
-        cancelAnimationFrame(frameRef.current);
-      }
-    };
-  }, []);
-
-  const handleMouseMove = (event: React.MouseEvent) => {
-    const el = slideRef.current;
-    if (!el) return;
-
-    const r = el.getBoundingClientRect();
-    xRef.current = event.clientX - (r.left + Math.floor(r.width / 2));
-    yRef.current = event.clientY - (r.top + Math.floor(r.height / 2));
-  };
-
-  const handleMouseLeave = () => {
-    xRef.current = 0;
-    yRef.current = 0;
-  };
-
-  const imageLoaded = (event: React.SyntheticEvent<HTMLImageElement>) => {
-    event.currentTarget.style.opacity = "1";
-  };
-
-  const { src, button, title, href } = slide;
-
-  return (
-    <div className="[perspective:1200px] [transform-style:preserve-3d]">
-      <li
-        ref={slideRef}
-        // FIXED: Swapped 70vmin for standard card dimensions (280px mobile, 320px desktop)
-        className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[280px] h-[380px] sm:w-[320px] sm:h-[420px] mx-4 z-10 shrink-0"
-        onClick={() => handleSlideClick(index)}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          transform:
-            current !== index
-              ? "scale(0.98) rotateX(8deg)"
-              : "scale(1) rotateX(0deg)",
-          transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-          transformOrigin: "bottom",
-        }}
-      >
-        <div
-          className="absolute top-0 left-0 w-full h-full bg-[#1D1F2F] rounded-2xl overflow-hidden transition-all duration-150 ease-out shadow-lg"
-          style={{
-            transform:
-              current === index
-                ? "translate3d(calc(var(--x) / 30), calc(var(--y) / 30), 0)"
-                : "none",
-          }}
-        >
-          <img
-            className="absolute inset-0 w-[120%] h-[120%] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
-            style={{
-              opacity: current === index ? 1 : 0.5,
-            }}
-            alt={title}
-            src={src}
-            onLoad={imageLoaded}
-            loading="eager"
-            decoding="sync"
-          />
-          {current === index && (
-            <div className="absolute inset-0 bg-black/40 transition-all duration-1000" />
-          )}
-        </div>
-
-        <article
-          className={`relative p-6 transition-opacity duration-1000 ease-in-out ${
-            current === index ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
-        >
-          <h2 className="text-xl md:text-2xl font-heading font-medium text-white relative">
-            {title}
-          </h2>
-          <div className="flex justify-center mt-6">
-            <Link
-              href={href}
-              className="px-6 py-2 w-fit mx-auto text-[#0F2643] bg-white border border-transparent text-[11px] uppercase tracking-widest font-bold flex justify-center items-center rounded-full hover:bg-[#DA6D40] hover:text-white transition duration-300 shadow-xl"
-            >
-              {button}
-            </Link>
-          </div>
-        </article>
-      </li>
-    </div>
-  );
-};
-
-interface CarouselControlProps {
-  type: string;
-  title: string;
-  handleClick: () => void;
-}
-
-const CarouselControl = ({
-  type,
-  title,
-  handleClick,
-}: CarouselControlProps) => {
-  return (
-    <button
-      className={`w-10 h-10 flex items-center mx-2 justify-center bg-white border border-[#0F2643]/10 rounded-full focus:outline-none hover:bg-[#0F2643] hover:text-white hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 shadow-md ${
-        type === "previous" ? "rotate-180" : ""
-      }`}
-      title={title}
-      onClick={handleClick}
-    >
-      <IconArrowNarrowRight className="text-current w-5 h-5" />
-    </button>
-  );
-};
 
 interface CarouselProps {
   slides: SlideData[];
 }
 
 export function Carousel({ slides }: CarouselProps) {
-  const [current, setCurrent] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const handlePreviousClick = () => {
-    const previous = current - 1;
-    setCurrent(previous < 0 ? slides.length - 1 : previous);
-  };
+  useEffect(() => {
+    checkScrollability();
+  }, []);
 
-  const handleNextClick = () => {
-    const next = current + 1;
-    setCurrent(next === slides.length ? 0 : next);
-  };
-
-  const handleSlideClick = (index: number) => {
-    if (current !== index) {
-      setCurrent(index);
+  const checkScrollability = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
     }
   };
 
-  const id = useId();
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      // Adjusted scroll distance to match the new, smaller card width + gap
+      carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
 
   return (
-    <div
-      // FIXED: Swapped 70vmin wrapper to match the exact dimensions of ONE card
-      className="relative w-[280px] h-[380px] sm:w-[320px] sm:h-[420px] mx-auto"
-      aria-labelledby={`carousel-heading-${id}`}
-    >
-      <ul
-        // FIXED: adjusted negative margins to match the new mx-4 on the cards
-        className="absolute flex -mx-4 transition-transform duration-1000 ease-in-out"
-        style={{
-          transform: `translateX(-${current * (100 / slides.length)}%)`,
-        }}
+    <div className="relative w-full">
+      {/* Right side fade gradient */}
+      <div className="pointer-events-none absolute right-0 top-0 z-20 h-full w-[5%] bg-gradient-to-l from-white to-transparent" />
+
+      {/* Main Scroll Container */}
+      <div
+        className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth py-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        ref={carouselRef}
+        onScroll={checkScrollability}
       >
-        {slides.map((slide, index) => (
-          <Slide
-            key={index}
-            slide={slide}
-            index={index}
-            current={current}
-            handleSlideClick={handleSlideClick}
-          />
-        ))}
-      </ul>
+        <div className="mx-auto flex w-full max-w-7xl flex-row justify-start gap-4 pl-4 md:gap-6 md:pl-10">
+          {slides.map((slide, index) => (
+            <Link
+              href={slide.href}
+              key={"card" + index}
+              // Scaled down dimensions: Mobile (220x300) | Desktop (280x380)
+              className="group relative z-10 flex h-[300px] w-[220px] shrink-0 flex-col justify-between overflow-hidden rounded-[24px] bg-[#FBECDB]/20 sm:h-[380px] sm:w-[280px] transition-transform duration-500 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-[#0F2643]/10 last:mr-[5vw]"
+            >
+              {/* Top Gradient for Text Readability */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 z-20 h-2/3 bg-gradient-to-b from-black/70 via-black/20 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
+              
+              {/* Bottom Gradient for Button Readability */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-1/3 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-      <div className="absolute flex justify-center w-full top-[calc(100%+2rem)]">
-        <CarouselControl
-          type="previous"
-          title="Go to previous slide"
-          handleClick={handlePreviousClick}
-        />
+              {/* Card Content (Top) */}
+              <div className="relative z-30 p-5 md:p-6">
+                {slide.category && (
+                  <p className="text-left font-sans text-[10px] font-bold uppercase tracking-widest text-[#DA6D40]">
+                    {slide.category}
+                  </p>
+                )}
+                {/* Scaled down heading size */}
+                <h3 className="mt-2 text-left font-heading text-xl font-medium leading-tight text-white md:text-2xl">
+                  {slide.title}
+                </h3>
+              </div>
 
-        <CarouselControl
-          type="next"
-          title="Go to next slide"
-          handleClick={handleNextClick}
-        />
+              {/* Card Content (Bottom) */}
+              <div className="relative z-30 flex w-full p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:p-6">
+                <div className="flex h-9 w-fit items-center justify-center rounded-full bg-white px-5 text-[10px] font-bold uppercase tracking-widest text-[#0F2643] shadow-md transition-colors group-hover:bg-[#DA6D40] group-hover:text-white">
+                  {slide.button}
+                </div>
+              </div>
+
+              {/* Background Image */}
+              <Image
+                src={slide.src}
+                alt={slide.title}
+                fill
+                className="absolute inset-0 z-10 object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                sizes="(max-width: 768px) 220px, 280px"
+              />
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation Controls */}
+      <div className="mr-4 mt-2 flex justify-end gap-2 md:mr-10">
+        <button
+          className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full border border-[#0F2643]/10 bg-white text-[#0F2643] shadow-sm transition-all hover:bg-[#0F2643] hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-[#0F2643]"
+          onClick={scrollLeft}
+          disabled={!canScrollLeft}
+          aria-label="Previous slide"
+        >
+          <IconArrowNarrowLeft className="h-5 w-5 text-current" />
+        </button>
+        <button
+          className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full border border-[#0F2643]/10 bg-white text-[#0F2643] shadow-sm transition-all hover:bg-[#0F2643] hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-[#0F2643]"
+          onClick={scrollRight}
+          disabled={!canScrollRight}
+          aria-label="Next slide"
+        >
+          <IconArrowNarrowRight className="h-5 w-5 text-current" />
+        </button>
       </div>
     </div>
   );
